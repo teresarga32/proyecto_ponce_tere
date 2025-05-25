@@ -2,12 +2,12 @@ import torch
 import pandas as pd
 import numpy as np
 
-from bachelor_arbeit.preprocessing import (
+from ml_var.preprocessing import (
     download_and_preprocess_multiasset,
 )
-from bachelor_arbeit.train import train_model
-from bachelor_arbeit.visualization import plot_metrics
-from bachelor_arbeit.io import save_dataset_split, load_dataset_split
+from ml_var.train import train_model
+from ml_var.visualization import plot_metrics
+from ml_var.io import save_dataset_split, load_dataset_split
 
 from pathlib import Path
 
