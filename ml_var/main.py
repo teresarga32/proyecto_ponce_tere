@@ -115,9 +115,9 @@ def main():
     
     # Hyperparameters:
     training_specifications = {
-        "epochs": 1000, 
+        "epochs": 500, 
         "batch_size": 16, 
-        "lr": 5e-5,
+        "lr": 1e-4,
         "early_stopping_patience": 10,
     }
     
