@@ -4,8 +4,8 @@ import numpy as np
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 
-from bachelor_arbeit.io import download_and_extract_returns_from_tickers
-from bachelor_arbeit.garch import (
+from ml_var.io import download_and_extract_returns_from_tickers
+from ml_var.garch import (
     get_volatility_from_garch,
     get_volatility_from_garch_rolling,
 )

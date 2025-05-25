@@ -4,8 +4,8 @@ import torch
 import numpy as np
 from torch.utils.data import DataLoader, TensorDataset
 
-from bachelor_arbeit.model import compute_var_from_mdn
-from bachelor_arbeit.backtesting_metrics import var_backtesting
+from ml_var.model import compute_var_from_mdn
+from ml_var.backtesting_metrics import var_backtesting
 
 def mdn_loss(y, pi, mu, sigma, eps=1e-6):
     """La loss que usamos en nuestro entrenamiento.

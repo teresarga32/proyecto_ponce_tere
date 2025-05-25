@@ -7,9 +7,9 @@ from torch.utils.data import DataLoader, TensorDataset
 
 import pandas as pd
 
-from bachelor_arbeit.model import VaRModel
+from ml_var.model import VaRModel
 
-from bachelor_arbeit.metrics import (
+from ml_var.metrics import (
     mdn_loss,
     evaluate_model_with_backtesting,
 )
