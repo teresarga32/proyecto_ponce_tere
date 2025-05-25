@@ -18,12 +18,12 @@ class Attention(nn.Module):
 
 
 class VaRModel(nn.Module):
-    def __init__(self, input_size=2, num_lstm_layers=2, hidden_size=64, mdn_size=32, n_components=3, dropout=0.2, bidirectional_lstm=False):
+    def __init__(self, input_size, num_lstm_layers, hidden_size, mdn_size, n_components, dropout, bidirectional_lstm):
         super().__init__()
         self.lstm = nn.LSTM(
             input_size=input_size, 
             num_layers=num_lstm_layers, 
-            hidden_size=hidden_size, 
+            hidden_size=hidden_size,
             batch_first=True,
             bidirectional=bidirectional_lstm,
         )
@@ -33,9 +33,6 @@ class VaRModel(nn.Module):
             nn.Linear(lstm_output_size, mdn_size*2),
             nn.ReLU(),
             nn.Dropout(dropout),
-            nn.Linear(mdn_size*2, mdn_size),
-            nn.ReLU(),
-            nn.Dropout(dropout)
         )
         self.mdn = nn.ModuleDict({
             'pi': nn.Linear(mdn_size, n_components),
