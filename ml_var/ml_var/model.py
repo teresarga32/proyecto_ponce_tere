@@ -30,7 +30,7 @@ class VaRModel(nn.Module):
         lstm_output_size = hidden_size * (2 if bidirectional_lstm else 1)
         self.attention = Attention(lstm_output_size)
         self.fc = nn.Sequential(
-            nn.Linear(lstm_output_size, mdn_size*2),
+            nn.Linear(lstm_output_size, mdn_size),
             nn.ReLU(),
             nn.Dropout(dropout),
         )
