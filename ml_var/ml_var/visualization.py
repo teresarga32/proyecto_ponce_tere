@@ -16,8 +16,8 @@ def plot_metric_from_dataframe(
         plt.figure(figsize=(12, 6))
         plt.plot(log_dataframe['epoch'][exception_mask], log_dataframe[metric_name][exception_mask], label='VaR Exception Rate', marker='o')
         plt.xlabel('Epoch')
-        plt.ylabel(f"{metric_name.replace('_', ' ').title}")
-        plt.title(f"VaR {metric_name.replace('_', ' ').title} over Epochs")
+        plt.ylabel(f"{metric_name.replace('_', ' ').title()}")
+        plt.title(f"VaR {metric_name.replace('_', ' ').title()} over Epochs")
         plt.legend()
         plt.grid(True)
         plot_path = plots_folder / f"train_metrics_{metric_name}.png"
