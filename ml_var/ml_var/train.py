@@ -97,7 +97,7 @@ def train_model(
 
         # Cada 10 epochs evaluamos el modelo para ver como performea con el test dataset
         # Evaluate on test set at the end of each epoch (or every N epochs)
-        do_eval = ((epoch+1) % 10 == 0 or epoch == epochs-1)
+        do_eval = ((epoch+1) % 5 == 0 or epoch == epochs-1)
         if do_eval:
             
             # Calculamos las metrics para el test set
