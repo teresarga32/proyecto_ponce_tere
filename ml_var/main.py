@@ -182,7 +182,7 @@ def main():
     
     print(f"\nDisplaying metrics of best epoch from training:\n")
     for metric in computed_metrics:
-        print(f"{metric.replace('_', ' ').title()}: {best_epoch_metrics[metric]:.2f}")
+        print(f"Metric: {metric.replace('_', ' ').title()}: \nScore: {best_epoch_metrics[metric]:.2f}")
 
     # Plot training metrics for visualization purposes
     plots_folder = experiment_folder / "training_plots"
