@@ -4,6 +4,7 @@ import pandas as pd
 from pathlib import Path
 import numpy as np
 import yfinance as yf
+import json
 
 def load_dataframe_from_csv_file(
     filename: Path = Path("training_log.csv"),
@@ -52,3 +53,19 @@ def download_and_extract_returns_from_tickers(
         all_returns.append(returns)
     returns_df = pd.concat(all_returns, axis=1).dropna()
     return returns_df
+
+
+def save_dict_to_json(data: dict, filename: str) -> None:
+    """
+    Saves a dictionary to a JSON file.
+
+    Parameters:
+        data (dict): The dictionary to save.
+        filename (str): The path to the JSON file.
+    """
+    try:
+        with open(filename, 'w', encoding='utf-8') as f:
+            json.dump(data, f, indent=4, ensure_ascii=False)
+        print(f"Dictionary successfully saved to {filename}")
+    except Exception as e:
+        print(f"Error saving dictionary to JSON: {e}")
