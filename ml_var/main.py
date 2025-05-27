@@ -40,7 +40,7 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument(
         "--experiment_name",
         type=str,
-        default="experiment_multi_asset_low_complexity_optimize_mdn_3_hs_64",
+        default="experiment_multi_asset_low_complexity_optimize_mdn_3_hs_32_lstm_2",
         help="The Path where the obtained training plots should be stored.",
     )
     return parser.parse_args()
@@ -57,7 +57,7 @@ def main():
     dataset_file = "" 
         
     experiment_name = args.experiment_name
-    experiment_folder = Path("experiments"/experiment_name)
+    experiment_folder = Path(f"experiments/{experiment_name}")
     experiment_folder.mkdir(parents=True, exist_ok=True)
 
     if download_data:
@@ -128,8 +128,8 @@ def main():
     # Arquitectura del modelo:
     architecture_specifications = {
         "input_size": 2,
-        "num_lstm_layers": 1,
-        "hidden_size": 64, 
+        "num_lstm_layers": 2,
+        "hidden_size": 32, 
         "mdn_size": 16,
         "n_components": 3,
         "dropout": 0.4,
