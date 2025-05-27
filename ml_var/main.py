@@ -40,7 +40,7 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument(
         "--experiment_name",
         type=str,
-        default="experiment_multi_asset_low_complexity_optimize_mdn_3_hs_32_lstm_2",
+        default="experiment_multi_asset_low_complexity_optimize_mdn_3_hs_32_lstm_1_mdn_8",
         help="The Path where the obtained training plots should be stored.",
     )
     return parser.parse_args()
@@ -128,9 +128,9 @@ def main():
     # Arquitectura del modelo:
     architecture_specifications = {
         "input_size": 2,
-        "num_lstm_layers": 2,
+        "num_lstm_layers": 1,
         "hidden_size": 32, 
-        "mdn_size": 16,
+        "mdn_size": 8,
         "n_components": 3,
         "dropout": 0.4,
         "bidirectional_lstm": False,
@@ -184,7 +184,7 @@ def main():
     for metric in computed_metrics:
         metric_string = metric.replace('_', ' ').title()
         metric_score = best_epoch_metrics[metric]
-        print(f"Metric: {metric_string}: \nScore: {metric_score:.2f}")
+        print(f"{metric_string}: {metric_score:.2f}")
 
     # Plot training metrics for visualization purposes
     plots_folder = experiment_folder / "training_plots"
