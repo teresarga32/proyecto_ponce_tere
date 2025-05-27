@@ -1,13 +1,16 @@
 import torch
 import pandas as pd
-import numpy as np
 
 from ml_var.preprocessing import (
     download_and_preprocess_multiasset,
 )
 from ml_var.train import train_model
 from ml_var.visualization import plot_metrics
-from ml_var.io import save_dataset_split, load_dataset_split
+from ml_var.io import (
+    save_dataset_split, 
+    load_dataset_split,
+    save_dict_to_json,
+)
 
 from pathlib import Path
 
@@ -37,7 +40,7 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument(
         "--experiment_name",
         type=str,
-        default="experiment_multi_asset",
+        default="experiment_multi_asset_low_complexity_optimize_mdn_3",
         help="The Path where the obtained training plots should be stored.",
     )
     return parser.parse_args()
@@ -51,6 +54,7 @@ def main():
     lookback = args.lookback_period
     rolling_garch = args.rolling_garch
     download_data = args.download_data
+    dataset_file = "" 
         
     experiment_name = args.experiment_name
     experiment_folder = Path(experiment_name)
@@ -101,7 +105,7 @@ def main():
     else:
         
         # Si tenemos ya data disponible, la podemos directamente loadear del archivo
-        
+        dataset_file = "multiasset_data.npz"
         X_train, y_train, X_test, y_test = load_dataset_split("multiasset_data.npz")
 
 
@@ -125,12 +129,28 @@ def main():
     architecture_specifications = {
         "input_size": 2,
         "num_lstm_layers": 1,
-        "hidden_size": 64, 
+        "hidden_size": 32, 
         "mdn_size": 16,
-        "n_components": 2,
+        "n_components": 3,
         "dropout": 0.4,
         "bidirectional_lstm": False,
     }
+    
+    specifications = {
+        "dataset_specifications": {
+            "tickers_nr": 53,
+            "dataset_file": dataset_file,
+            "lookback": lookback,
+            "rolling_garch": rolling_garch,
+        },
+        "training_specifications": training_specifications,
+        "architecture_specifications": architecture_specifications,
+    }
+    
+    save_dict_to_json(
+        data=specifications, 
+        filename=experiment_folder/f"{experiment_name}_specifications.json",
+    )
     
     # Train model with given specifications
     model, scaler, log_df = train_model(
