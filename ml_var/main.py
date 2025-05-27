@@ -40,7 +40,7 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument(
         "--experiment_name",
         type=str,
-        default="experiment_multi_asset_low_complexity_optimize_mdn_3",
+        default="experiment_multi_asset_low_complexity_optimize_mdn_3_hs_64",
         help="The Path where the obtained training plots should be stored.",
     )
     return parser.parse_args()
@@ -57,7 +57,7 @@ def main():
     dataset_file = "" 
         
     experiment_name = args.experiment_name
-    experiment_folder = Path(experiment_name)
+    experiment_folder = Path("experiments"/experiment_name)
     experiment_folder.mkdir(parents=True, exist_ok=True)
 
     if download_data:
@@ -68,24 +68,24 @@ def main():
             #"AMAT", "NOW", "TEAM", "SNPS", "CDNS", "KLAC", "ANET", "DASH",
             
             # Financials
-            #"JPM", "V", "MA", "BAC", "WFC", "C", "GS", "AXP", "BLK", "SPGI",
+            "JPM", "V", "MA", "BAC", "WFC", "C", "GS", "AXP", "BLK", "SPGI",
             #"PYPL", "COIN", "TROW", "NDAQ", "MSCI", "ICE", 
             
             # Healthcare
-            #"UNH", "LLY", "JNJ", "MRK", "ABBV", "PFE", "DHR", "MDT", "BMY",
+            "UNH", "LLY", "JNJ", "MRK", "ABBV", "PFE", "DHR", "MDT", "BMY",
             #"AMGN", "GILD", "VRTX", "REGN", "MRNA", "ILMN", "DXCM",
             
             # Industrials & Energy
-            #"RTX", "GE", "HON", "CAT", "DE", "LMT", "GD", "NOC", "BA", 
+            "RTX", "GE", "HON", "CAT", "DE", "LMT", "GD", "NOC", "BA", 
             #"UPS", "FDX", "CSX", "UNP", "XOM", "CVX", "COP", "SLB", "EOG",
             #"MPC", "PSX", "VLO", "EXE",
             
             # Consumer & Retail
-            #"WMT", "PG", "KO", "PEP", "COST", "TGT", "HD", "LOW", "NKE", 
+            "WMT", "PG", "KO", "PEP", "COST", "TGT", "HD", "LOW", "NKE", 
             #"SBUX", "MCD", "YUM", "BKNG", "MAR", "WSM", "TKO",
             
             # Other Key Sectors
-            #"TSM", "ASML", "LIN", "APD", "ORCL", "SAP", "ADP", "IBM",
+            "TSM", "ASML", "LIN", "APD", "ORCL", "SAP", "ADP", "IBM",
             #"TMO", "BDX", "ISRG", "ZTS", "IDXX", "BSX", "EW", "SYY",
             #"EL", "PM", "MO", "CL", "HSY", "KHC", "GIS"
         ]
@@ -129,7 +129,7 @@ def main():
     architecture_specifications = {
         "input_size": 2,
         "num_lstm_layers": 1,
-        "hidden_size": 32, 
+        "hidden_size": 64, 
         "mdn_size": 16,
         "n_components": 3,
         "dropout": 0.4,
