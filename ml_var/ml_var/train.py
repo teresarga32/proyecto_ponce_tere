@@ -168,4 +168,4 @@ def train_model(
     print(f"Training log saved to {log_file}")
     
     # Returneamos el modelo, el scaler y los logs conteniendo las training metrics
-    return model, scaler, log_df
+    return model, scaler, log_df, best_epoch

@@ -153,7 +153,7 @@ def main():
     )
     
     # Train model with given specifications
-    model, scaler, log_df = train_model(
+    model, scaler, log_df, best_epoch = train_model(
         X_train, 
         y_train, 
         X_test, 
@@ -167,6 +167,22 @@ def main():
     torch.save(model.state_dict(), experiment_folder / f"{experiment_name}_multi_asset_var_model.pth")
     pd.to_pickle(scaler, experiment_folder / f"{experiment_name}_multi_asset_scaler.pkl")
     print(f"Training complete! Model and data saved for {experiment_name}")
+
+    # Display computed metrics of trained model
+    computed_metrics = [
+        "test_loss",
+        "test_mae",
+        "test_mse",
+        "exception_rate",
+        "expected_shortfall",
+        "kupiec_p",
+        "christoffersen_p"
+    ]
+    best_epoch_metrics = log_df.loc[best_epoch-1].to_dict()
+    
+    print(f"\nDisplaying metrics of best epoch from training:\n")
+    for metric in computed_metrics:
+        print(f"{metric.replace('_', ' ').title()}: {best_epoch_metrics[metric]:.2f}")
 
     # Plot training metrics for visualization purposes
     plots_folder = experiment_folder / "training_plots"
